@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Litt Quiz</string>
+
+
+    <string name="question_modernist">"Which one of these is a modernist writer?
+        A. Hemmingway      C. Ovid
+        B. G.G Marquez       D. Stewart"</string>
+    <string name="question_postmodernist">"Which best of these best describes post modern lit?
+        A. Realist      C. Structured
+        B. Confusing      D. None"</string>
+    <string name="question_mice">"Who wrote Of Mice and Men?
+        A. Steinbeck      C. Hemmingway
+        B. Bradbury       D. Frost"</string>
+    <string name="question_beowulf">"When was Beowulf written?
+        A. 700-1000AD      C. 1200-1500AD
+        B. 300-600AD       D. 0-300AD"</string>
+    <string name="question_Hamlet">"Who wrote Hamlet?
+        A. Shakespeare      C. Babbage
+        B. Williams       D. Chaucer"</string>
+    <string name="question_poetry">"What is iambic pentameter?
+        A. stressed/unstressed      C. stressed/stressed
+        B. unstressed/stressed       D. unstressed/unstressed"</string>
+
+
+
+    <string name="a_button">A</string>
+    <string name="b_button">B</string>
+    <string name="c_button">C</string>
+    <string name="d_button">D</string>
+
+    <string name="next_button">Next</string>
+    <string name="prev_button">Prev</string>
+
+
+    <string name="correct_toast">You got it right!</string>
+    <string name="incorrect_toast">You got it wrong!</string>
+</resources>

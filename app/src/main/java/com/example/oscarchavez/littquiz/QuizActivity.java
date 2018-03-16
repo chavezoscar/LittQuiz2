@@ -173,7 +173,13 @@ public class QuizActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Random random = new Random();
                 mCurrentIndex = random.nextInt((mQuestionBank.length)-1);
-                updateQuestion();
+                if (mCurrentIndex == 0) {
+                    mCurrentIndex++;
+                    updateQuestion();
+                }
+                else{
+                    updateQuestion();
+                }
             }
         });
 

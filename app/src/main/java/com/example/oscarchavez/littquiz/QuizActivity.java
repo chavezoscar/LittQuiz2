@@ -64,6 +64,15 @@ public class QuizActivity extends AppCompatActivity {
         int question = mQuestionBank[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(question);
 
+
+        mQuestionTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mCurrentIndex = (mCurrentIndex + 1 ) % mQuestionBank.length;
+                updateQuestion();
+            }
+        });
+
         //toasts are currently not correct
 
 

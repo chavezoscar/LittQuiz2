@@ -10,12 +10,15 @@ import android.widget.*;
 
 import org.w3c.dom.Text;
 
+import java.util.Random;
+
 public class QuizActivity extends AppCompatActivity {
 
     private Button mAButton;
     private Button mBButton;
     private Button mCButton;
     private Button mDButton;
+    private Button mRandomButton;
     private ImageButton mNextButton;
     private ImageButton mPrevButton;
     private TextView mQuestionTextView;
@@ -153,15 +156,25 @@ public class QuizActivity extends AppCompatActivity {
 
                 if (mCurrentIndex <= 0) {
                     mCurrentIndex = mQuestionBank.length - 1;
-                    int question = mQuestionBank[mCurrentIndex].getTextResId();
+                    //int question = mQuestionBank[mCurrentIndex].getTextResId();
                     updateQuestion();
                 } else {
                     mCurrentIndex = (mCurrentIndex - 1) % mQuestionBank.length;
-                    int question = mQuestionBank[mCurrentIndex].getTextResId();
+                    //int question = mQuestionBank[mCurrentIndex].getTextResId();
                     updateQuestion();
                 }
             }
 
+        });
+
+        mRandomButton = findViewById(R.id.random_button);
+        mRandomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Random random = new Random();
+                mCurrentIndex = random.nextInt((mQuestionBank.length)-1);
+                updateQuestion();
+            }
         });
 
     }

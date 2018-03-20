@@ -22,7 +22,6 @@
         B. unstressed/stressed       D. unstressed/unstressed"</string>
 
 
-
     <string name="a_button">A</string>
     <string name="b_button">B</string>
     <string name="c_button">C</string>
@@ -35,4 +34,10 @@
 
     <string name="correct_toast">You got it right!</string>
     <string name="incorrect_toast">You got it wrong!</string>
+    <string name="warning_text">Are you sure you want to do this?</string>
+    <string name="show_answer_button">Show Answer</string>
+    <string name="cheat_button">Cheat!</string>
+    <string name="judgement_toast">Cheating is wrong.</string>
+
+
 </resources>

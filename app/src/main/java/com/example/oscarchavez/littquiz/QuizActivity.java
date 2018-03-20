@@ -1,5 +1,6 @@
 package com.example.oscarchavez.littquiz;
 
+import android.content.Intent;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,12 +20,18 @@ public class QuizActivity extends AppCompatActivity {
     private Button mCButton;
     private Button mDButton;
     private Button mRandomButton;
+    private Button mCheatButton;
+
     private ImageButton mNextButton;
     private ImageButton mPrevButton;
+
     private TextView mQuestionTextView;
+    private TextView mScoreTextView;
 
     private static final String TAG = "QuizActivity";
     private static final String KEY_INDEX= "index";
+    private static final int REQUEST_CODE_CHEAT = 0;
+
 
 
 
@@ -43,8 +50,11 @@ public class QuizActivity extends AppCompatActivity {
 };
 
     private int mCurrentIndex = 0;
+    private int mCurrentScore;
 
     private void updateQuestion(){
+
+        //Log.d(TAG, "Updating question text", new Exception());
         int question = mQuestionBank[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(question);
 
@@ -58,10 +68,21 @@ public class QuizActivity extends AppCompatActivity {
 
         if (savedInstanceState != null){
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
+            mCurrentScore = savedInstanceState.getInt(KEY_INDEX, mCurrentScore);
         }
 
 
 
+
+
+
+
+
+
+
+        mScoreTextView = findViewById(R.id.score_text);
+        int score = mCurrentScore;
+        mScoreTextView.setText(Integer.toString(mCurrentScore));
 
         mQuestionTextView = findViewById(R.id.question_text_view);
         int question = mQuestionBank[mCurrentIndex].getTextResId();
@@ -156,11 +177,11 @@ public class QuizActivity extends AppCompatActivity {
 
                 if (mCurrentIndex <= 0) {
                     mCurrentIndex = mQuestionBank.length - 1;
-                    //int question = mQuestionBank[mCurrentIndex].getTextResId();
+                    int question = mQuestionBank[mCurrentIndex].getTextResId();
                     updateQuestion();
                 } else {
                     mCurrentIndex = (mCurrentIndex - 1) % mQuestionBank.length;
-                    //int question = mQuestionBank[mCurrentIndex].getTextResId();
+                    int question = mQuestionBank[mCurrentIndex].getTextResId();
                     updateQuestion();
                 }
             }
@@ -183,17 +204,45 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
+        mCheatButton = findViewById(R.id.cheat_button);
+        mCheatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                char answerIsTrue = mQuestionBank[mCurrentIndex].getAnswerTrue();
+                Intent intent = CheatActivity.newIntent(QuizActivity.this, answerIsTrue);
+
+                startActivityForResult(intent, REQUEST_CODE_CHEAT);
+            }
+        });
+
+        updateQuestion();
+
+
     }
 
 
-    private void checkAnswer(char buttonPressed){
-        char questionAnswer = mQuestionBank[mCurrentIndex].getAnswerTrue();
-        int message = 0;
 
-        if (buttonPressed == questionAnswer)
+
+
+    private void checkAnswer(char buttonPressed){
+
+        char questionAnswer = mQuestionBank[mCurrentIndex].getAnswerTrue();
+        int message;
+        mScoreTextView = findViewById(R.id.score_text);
+        if (buttonPressed == questionAnswer) {
             message = R.string.correct_toast;
+            mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+            int question = mQuestionBank[mCurrentIndex].getTextResId();
+            mCurrentScore++;
+           // mScoreTextView.setText(Integer.toString(mCurrentScore++));
+            updateQuestion();
+        }
         else {
             message = R.string.incorrect_toast;
+
+
+
+
         }
 
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();

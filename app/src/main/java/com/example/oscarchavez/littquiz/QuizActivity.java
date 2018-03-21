@@ -1,15 +1,12 @@
 package com.example.oscarchavez.littquiz;
 
 import android.content.Intent;
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.*;
 
-import org.w3c.dom.Text;
 
 import java.util.Random;
 
@@ -33,7 +30,8 @@ public class QuizActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_CHEAT = 0;
 
 
-
+    private int mCurrentIndex = 0;
+    private int mCurrentScore;
 
     //private char buttonChar;
 
@@ -49,8 +47,7 @@ public class QuizActivity extends AppCompatActivity {
 
 };
 
-    private int mCurrentIndex = 0;
-    private int mCurrentScore;
+
 
     private void updateQuestion(){
 
@@ -60,6 +57,8 @@ public class QuizActivity extends AppCompatActivity {
 
     }
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +67,7 @@ public class QuizActivity extends AppCompatActivity {
 
         if (savedInstanceState != null){
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
-            mCurrentScore = savedInstanceState.getInt(KEY_INDEX, mCurrentScore);
+            mCurrentScore = savedInstanceState.getInt(KEY_INDEX, 0);
         }
 
 
@@ -159,7 +158,6 @@ public class QuizActivity extends AppCompatActivity {
         });
 
         mNextButton = findViewById(R.id.next_button);
-
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -224,7 +222,7 @@ public class QuizActivity extends AppCompatActivity {
 
 
 
-    private void checkAnswer(char buttonPressed){
+    private void checkAnswer(char buttonPressed){ //set score of 0 to empty string so that when 0 score does not display/althernative is to make true the show text in xml
 
         char questionAnswer = mQuestionBank[mCurrentIndex].getAnswerTrue();
         int message;
@@ -234,7 +232,7 @@ public class QuizActivity extends AppCompatActivity {
             mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
             int question = mQuestionBank[mCurrentIndex].getTextResId();
             mCurrentScore++;
-           // mScoreTextView.setText(Integer.toString(mCurrentScore++));
+            mScoreTextView.setText(Integer.toString(mCurrentScore));
             updateQuestion();
         }
         else {

@@ -80,6 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top|center"
         android:text="@string/cheat_button"
+        android:layout_marginTop="200dp"
         android:id="@+id/cheat_button"/>
 
 
